@@ -9,37 +9,39 @@ namespace ConsoleApp7
 {
     internal class DateClass
     {
-        DateTime date;
+         private DateTime data;
 
         public DateClass()
         {
+            data = DateTime.Now;
         }
 
         public DateClass(int year, int month, int day)
         {
-            date = new DateTime(year, month, day);
+            data = new DateTime(year, month, day);
         }
 
-        public DateTime Date
+        public DateTime Data
         {
-            get { return date; }
-            set { date = value; }
-        }
-        public DateTime PrevDay()
-        {
-            return date.AddDays(-1);
+            get { return data; }
+            set { data = value; }
         }
 
-        public DateTime NextDay()
+        public DateTime GetPreviousDay()
         {
-            return date.Add(TimeSpan.FromDays(1));
+            return data.AddDays(-1);
         }
 
-        public int DaysLeft()
+        public DateTime GetNextDay()
         {
-            return DateTime.DaysInMonth(date.Year, date.Month) - date.Day;
+            return data.AddDays(1);
         }
-       
+
+        public int GetDaysUntilEndOfMonth()
+        {
+            DateTime endOfMonth = new DateTime(data.Year, data.Month, DateTime.DaysInMonth(data.Year, data.Month));
+            return (endOfMonth - data).Days;
+        }
 
     }
 }
